@@ -22,7 +22,7 @@ public class OnlinerMozzila {
     @Test
     @Order(1)
     public void openBrowser() {
-        System.setProperty("webdriver.firefox.driver", "D:/selenium driver/geckodriver.exe");
+        System.setProperty("webdriver.gecko.driver", "D:/selenium driver/geckodriver.exe");
         driver = new FirefoxDriver();
         driver.get(baseUrl);
         driver.manage().window().maximize();
@@ -51,20 +51,38 @@ public class OnlinerMozzila {
 
     @Test
     @Order(4)
-    public void signIn() throws InterruptedException {
-        WebElement input = driver.findElement(By.id("login_field"));
-        input.sendKeys("MaryMaryVery");
-        input = driver.findElement(By.id("password"));
-        input.sendKeys("seledkasmolokom");
-        input = driver.findElement(By.xpath("//input[@name='commit']"));
-        input.sendKeys("seledkasmolokom");
-        input.click();
-        Thread.sleep(5000);
+    public void signUp() {
+        WebElement name = driver.findElement(By.xpath("//*[@id='auth-container']/div/div[2]/div/form/div[1]/div/div[2]/div/div/div/div/input"));
+        name.sendKeys("kalchenko.marya@gmail.com");
+        WebElement password = driver.findElement(By.xpath("//*[@id='auth-container']/div/div[2]/div/form/div[2]/div/div/div/div/input"));
+        password.sendKeys("seledkasmolokom");
+
+
     }
 
-}
+    @Test
+    @Order(5)
+    public void PressBotton2() throws AWTException, InterruptedException {
+        driver.findElement(By.xpath("//*[@id=\"auth-container\"]/div/div[2]/div/form/div[3]/button")).click();
+        Robot r = new Robot();
+        Robot rr = new Robot();
+        rr.keyPress(KeyEvent.VK_ENTER);
+        rr.keyRelease(KeyEvent.VK_ENTER);
+        Thread.sleep(5000);
 
-   /* @Test
+
+    }
+}
+/*
+    @Test
+    @Order(6)
+    public void signOut() {
+        driver.get(baseUrl + "sign-out");
+        Assertions.assertTrue(driver.getTitle().toUpperCase()
+                .contains("Stock images".toUpperCase()));
+    }
+}
+    @Test
     @Order(6)
     public String generate(){
         String s = "";
